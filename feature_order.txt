@@ -1,0 +1,24 @@
+eth_open
+eth_high
+eth_low
+eth_close
+eth_volume
+fear_gread_index
+open_interest
+google_trends_buy_crypto
+google_trends_bitcoin
+funding_rate
+VIX_Close ^VIX
+VIX_High ^VIX
+VIX_Low ^VIX
+VIX_Open ^VIX
+VIX_Volume ^VIX
+rsi
+ema_7
+ema_21
+macd
+macd_signal
+macd_diff
+price_change
+volume_diff
+volatility

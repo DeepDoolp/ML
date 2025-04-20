@@ -1,0 +1,10 @@
+streamlit
+streamlit-autorefresh
+pandas
+numpy
+joblib
+requests
+yfinance
+pytrends
+scikit-learn
+ta
