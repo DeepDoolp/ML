@@ -33,18 +33,23 @@ def run():
 
 
     def get_candles():
-        url = "https://api.binance.com/api/v3/klines"
-        params = {"symbol": "ETHUSDT", "interval": "1h", "limit": 150}
-        r = requests.get(url, params=params)
-        data = r.json()
-        df = pd.DataFrame(data, columns=[
-            "open_time", "open", "high", "low", "close", "volume",
-            "close_time", "quote_asset_volume", "num_trades",
-            "taker_buy_base_volume", "taker_buy_quote_volume", "ignore"
-        ])
-        df = df.astype({"open": float, "high": float, "low": float,
-                        "close": float, "volume": float})
+        try:
+            url = "https://api.binance.com/api/v3/klines"
+            params = {"symbol": "ETHUSDT", "interval": "1h", "limit": 150}
+            r = requests.get(url, params=params)
+            data = r.json()
+            df = pd.DataFrame(data, columns=[
+                "open_time", "open", "high", "low", "close", "volume",
+                "close_time", "quote_asset_volume", "num_trades",
+                "taker_buy_base_volume", "taker_buy_quote_volume", "ignore"
+            ])
+            df = df.astype({"open": float, "high": float, "low": float,
+                            "close": float, "volume": float})
+        except:
+            st.error("Ошибка при получении данных с Binance")
+            df = pd.DataFrame()
         return df
+        
     # Добавляем индикаторы
     def add_indicators(df):
         df["rsi"] = ta.momentum.RSIIndicator(df["close"], window=14).rsi()
