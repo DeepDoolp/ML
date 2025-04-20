@@ -1,5 +1,6 @@
 streamlit
 streamlit-autorefresh
+streamlit-option-menu
 pandas
 numpy
 joblib
