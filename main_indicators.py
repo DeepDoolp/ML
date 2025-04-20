@@ -31,12 +31,13 @@ def run():
         feature_order = [line.strip() for line in f.readlines()]
     feature_defaults = {f: 0 for f in feature_order}
 
-
+    # Тянем свечи
     def get_candles():
         try:
             url = "https://api.binance.com/api/v3/klines"
             params = {"symbol": "ETHUSDT", "interval": "1h", "limit": 150}
-            r = requests.get(url, params=params)
+            headers = {"User-Agent": "Mozilla/5.0"}
+            r = requests.get(url, params=params, headers=headers)
             data = r.json()
             df = pd.DataFrame(data, columns=[
                 "open_time", "open", "high", "low", "close", "volume",
@@ -45,10 +46,10 @@ def run():
             ])
             df = df.astype({"open": float, "high": float, "low": float,
                             "close": float, "volume": float})
-        except:
+        except: 
             st.error("Ошибка при получении данных с Binance")
-            df = pd.DataFrame()
-        return df
+            return pd.DataFrame()
+        return df   
         
     # Добавляем индикаторы
     def add_indicators(df):
